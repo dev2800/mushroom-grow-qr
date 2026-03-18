@@ -1,17 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
-
+// Demo mode - returns mock data when Supabase is not configured
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { productId, location, deviceType, referrer } = body
 
-    // Log the scan
+    // In demo mode, just return success
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      return NextResponse.json({
+        success: true,
+        demo: true,
+        scan: {
+          id: 'demo-' + Date.now(),
+          product_id: productId,
+          location: location || 'Unknown',
+          device_type: deviceType || 'Mobile',
+          scanned_at: new Date().toISOString(),
+        },
+      })
+    }
+
+    // When Supabase is configured, log the scan
+    const { createClient } = await import('@supabase/supabase-js')
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+
     const { data, error } = await supabase
       .from('scans')
       .insert({
@@ -42,7 +58,39 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const productId = searchParams.get('productId')
 
+  // Demo mode - return mock data
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    const demoScans = [
+      {
+        id: '1',
+        product_id: 'OYSTER-001',
+        location: 'Denver, CO',
+        device_type: 'iPhone',
+        scanned_at: new Date(Date.now() - 3600000).toISOString(),
+      },
+      {
+        id: '2',
+        product_id: 'LION-001',
+        location: 'Austin, TX',
+        device_type: 'Android',
+        scanned_at: new Date(Date.now() - 7200000).toISOString(),
+      },
+    ]
+
+    const filtered = productId
+      ? demoScans.filter((s) => s.product_id === productId)
+      : demoScans
+
+    return NextResponse.json({ scans: filtered, demo: true })
+  }
+
   try {
+    const { createClient } = await import('@supabase/supabase-js')
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+
     let query = supabase
       .from('scans')
       .select('*')
