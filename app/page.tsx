@@ -3,11 +3,11 @@ import { Suspense } from 'react'
 
 // Demo products with rich data
 const products = [
-  {
-    sku: 'OYSTER-001',
+  { 
+    sku: 'OYSTER-001', 
     name: 'Blue Oyster Mushroom',
     scientific: 'Pleurotus ostreatus',
-    image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=600&q=80',
+    image: '🍄',
     difficulty: 'Beginner',
     yield: '1-2 lbs per bag',
     timeToHarvest: '14-21 days',
@@ -20,10 +20,10 @@ const products = [
     totalGrows: 12500,
   },
   { 
-    sku: 'LION-001',
+    sku: 'LION-001', 
     name: "Lion's Mane",
     scientific: 'Hericium erinaceus',
-    image: 'https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?w=600&q=80',
+    image: '🦁',
     difficulty: 'Intermediate',
     yield: '1-1.5 lbs per block',
     timeToHarvest: '21-28 days',
@@ -36,10 +36,10 @@ const products = [
     totalGrows: 8200,
   },
   { 
-    sku: 'SHIITAKE-001',
+    sku: 'SHIITAKE-001', 
     name: 'Shiitake',
     scientific: 'Lentinula edodes',
-    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80',
+    image: '🍄',
     difficulty: 'Beginner',
     yield: '1-3 lbs per block',
     timeToHarvest: '7-14 days',
@@ -53,31 +53,49 @@ const products = [
   },
 ]
 
-const FeatureIcon = ({ id }: { id: number }) => {
-  const icons = [
-    // Video
-    <svg key={0} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>,
-    // Science/flask
-    <svg key={1} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21a48.25 48.25 0 0 1-8.135-.687c-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>,
-    // Lightning/offline
-    <svg key={2} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>,
-    // Chat
-    <svg key={3} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/></svg>,
-    // Chart
-    <svg key={4} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>,
-    // Trophy
-    <svg key={5} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0"/></svg>,
-  ]
-  return icons[id] ?? null
-}
-
 const features = [
-  { title: 'HD Video Guides',  desc: 'Crystal-clear instructions filmed by expert cultivators', color: 'text-blue-400',   bg: 'bg-blue-500/10 border-blue-500/20',   stat: '50+ hours' },
-  { title: 'Science-Backed',   desc: 'Every technique verified by mycology research',            color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20', stat: '100% researched' },
-  { title: 'Works Offline',    desc: 'Download videos for your grow room, no signal needed',     color: 'text-green-400',  bg: 'bg-green-500/10 border-green-500/20',   stat: 'Offline ready' },
-  { title: 'Expert Chat',      desc: 'Chat with certified mycologists when you need help',        color: 'text-amber-400',  bg: 'bg-amber-500/10 border-amber-500/20',   stat: '24/7 available' },
-  { title: 'Grow Tracking',    desc: 'Log your journey with photos, notes, and milestones',      color: 'text-pink-400',   bg: 'bg-pink-500/10 border-pink-500/20',     stat: 'Auto-reminders' },
-  { title: 'Certification',    desc: 'Earn badges and certificates as you master each variety',   color: 'text-yellow-400', bg: 'bg-yellow-500/10 border-yellow-500/20', stat: '12 badges' },
+  { 
+    icon: '🎥', 
+    title: 'HD Video Guides', 
+    desc: 'Crystal-clear instructions filmed by expert cultivators',
+    color: 'text-blue-400',
+    stat: '50+ hours',
+  },
+  { 
+    icon: '🔬', 
+    title: 'Science-Backed', 
+    desc: 'Every technique verified by mycology research',
+    color: 'text-purple-400',
+    stat: '100% researched',
+  },
+  { 
+    icon: '📱', 
+    title: 'Works Offline', 
+    desc: 'Download videos for your grow room (no signal needed)',
+    color: 'text-green-400',
+    stat: 'Offline ready',
+  },
+  { 
+    icon: '💬', 
+    title: 'Expert Chat', 
+    desc: 'Chat with certified mycologists when you need help',
+    color: 'text-amber-400',
+    stat: '24/7 available',
+  },
+  { 
+    icon: '📊', 
+    title: 'Grow Tracking', 
+    desc: 'Log your journey with photos, notes, and milestones',
+    color: 'text-pink-400',
+    stat: 'Auto-reminders',
+  },
+  { 
+    icon: '🏆', 
+    title: 'Certification', 
+    desc: 'Earn badges and certificates as you master each variety',
+    color: 'text-yellow-400',
+    stat: '12 badges',
+  },
 ]
 
 const testimonials = [
@@ -110,11 +128,13 @@ const testimonials = [
 export default function Home() {
   return (
     <main className="min-h-screen gradient-bg noise-overlay relative">
-      {/* Ambient glow effects */}
+      {/* Floating background particles */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-emerald-500/8 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[400px] bg-green-600/6 rounded-full blur-[100px]" />
-        <div className="absolute top-1/2 left-0 w-[300px] h-[300px] bg-emerald-700/5 rounded-full blur-[80px]" />
+        <div className="absolute top-20 left-10 text-8xl opacity-5 particle" style={{ animationDelay: '0s' }}>🍄</div>
+        <div className="absolute top-40 right-20 text-6xl opacity-5 particle" style={{ animationDelay: '2s' }}>🦁</div>
+        <div className="absolute bottom-20 left-1/4 text-7xl opacity-5 particle" style={{ animationDelay: '4s' }}>🍄</div>
+        <div className="absolute top-60 left-1/2 text-5xl opacity-5 particle" style={{ animationDelay: '1s' }}>🌿</div>
+        <div className="absolute bottom-40 right-1/3 text-6xl opacity-5 particle" style={{ animationDelay: '3s' }}>🌱</div>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 py-16 relative z-10">
@@ -158,32 +178,18 @@ export default function Home() {
           <div className="glass-dark rounded-3xl p-8 max-w-md mx-auto glow-forest mb-8">
             <div className="flex flex-col items-center">
               <div className="relative w-40 h-40 mb-6">
+                {/* Pulsing rings */}
                 <div className="absolute inset-0 rounded-2xl bg-forest-500/20 animate-ping"></div>
-                <div className="absolute inset-2 rounded-xl bg-forest-500/15 animate-pulse"></div>
-                <div className="relative w-full h-full bg-gradient-to-br from-forest-600/80 to-emerald-700/80 rounded-2xl flex items-center justify-center border border-forest-400/30 backdrop-blur-sm">
-                  {/* QR code pattern SVG */}
-                  <svg viewBox="0 0 80 80" className="w-20 h-20 text-white/90" fill="currentColor">
-                    <rect x="5" y="5" width="28" height="28" rx="3" fill="none" stroke="currentColor" strokeWidth="3"/>
-                    <rect x="11" y="11" width="16" height="16" rx="1"/>
-                    <rect x="47" y="5" width="28" height="28" rx="3" fill="none" stroke="currentColor" strokeWidth="3"/>
-                    <rect x="53" y="11" width="16" height="16" rx="1"/>
-                    <rect x="5" y="47" width="28" height="28" rx="3" fill="none" stroke="currentColor" strokeWidth="3"/>
-                    <rect x="11" y="53" width="16" height="16" rx="1"/>
-                    <rect x="47" y="47" width="8" height="8" rx="1"/>
-                    <rect x="59" y="47" width="8" height="8" rx="1"/>
-                    <rect x="47" y="59" width="8" height="8" rx="1"/>
-                    <rect x="59" y="59" width="8" height="8" rx="1"/>
-                    <rect x="35" y="5" width="8" height="8" rx="1"/>
-                    <rect x="5" y="35" width="8" height="8" rx="1"/>
-                    <rect x="35" y="35" width="8" height="8" rx="1"/>
-                  </svg>
+                <div className="absolute inset-2 rounded-xl bg-forest-500/30 animate-pulse"></div>
+                <div className="relative w-full h-full bg-gradient-to-br from-forest-500 to-emerald-600 rounded-2xl flex items-center justify-center">
+                  <span className="text-7xl">📱</span>
                 </div>
               </div>
               <h3 className="text-lg font-semibold mb-2">Point Camera at QR Code</h3>
               <p className="text-gray-400 text-sm mb-4">On your grow bag packaging</p>
               <div className="flex items-center gap-3 text-xs text-gray-500">
                 <span className="flex items-center gap-1">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                   No app required
                 </span>
                 <span className="text-gray-600">•</span>
@@ -223,16 +229,13 @@ export default function Home() {
                 href={`/${product.sku}`}
                 className={`glass rounded-2xl overflow-hidden border ${product.borderColor} card-hover group`}
               >
-                {/* Header with real photo */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-75"
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-40`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-4 text-xs text-gray-300 italic font-light">{product.scientific}</div>
+                {/* Header with gradient */}
+                <div className={`bg-gradient-to-br ${product.color} p-6 text-center relative overflow-hidden`}>
+                  <div className="absolute inset-0 shimmer"></div>
+                  <div className="relative">
+                    <div className="text-6xl mb-3 group-hover:scale-110 transition-transform">{product.image}</div>
+                    <div className="text-xs text-gray-400 italic">{product.scientific}</div>
+                  </div>
                 </div>
                 
                 {/* Content */}
@@ -295,13 +298,11 @@ export default function Home() {
           
           <div className="grid md:grid-cols-3 gap-6">
             {features.map((feature, i) => (
-              <div key={i} className="glass rounded-2xl p-6 card-hover group">
-                <div className={`w-12 h-12 rounded-xl ${feature.bg} border flex items-center justify-center mb-5 ${feature.color} group-hover:scale-110 transition-transform`}>
-                  <FeatureIcon id={i} />
-                </div>
+              <div key={i} className="glass rounded-2xl p-6 card-hover">
+                <div className={`text-5xl mb-4 ${feature.color}`}>{feature.icon}</div>
                 <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
                 <p className="text-sm text-gray-400 mb-3">{feature.desc}</p>
-                <div className={`text-xs font-medium ${feature.color}`}>{feature.stat}</div>
+                <div className="text-xs text-forest-400 font-medium">{feature.stat}</div>
               </div>
             ))}
           </div>
@@ -428,9 +429,7 @@ export default function Home() {
         {/* CTA Section */}
         <div className="text-center mb-16">
           <div className="glass-dark rounded-3xl p-12 max-w-2xl mx-auto glow-forest">
-            <div className="w-16 h-16 rounded-2xl bg-forest-500/20 border border-forest-400/30 flex items-center justify-center mx-auto mb-6">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8 text-forest-400"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>
-            </div>
+            <div className="text-6xl mb-6 animate-grow">🍄</div>
             <h2 className="text-3xl font-bold mb-4">Ready to Start Growing?</h2>
             <p className="text-gray-400 mb-8">
               Join 36,000+ successful home growers. Your first harvest is closer than you think.
